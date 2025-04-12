@@ -63,6 +63,11 @@
     src: "/etc/nginx/sites-available/{{ app_name }}"
     dest: "/etc/nginx/sites-enabled/{{ app_name }}"
     state: link
+
+- name: Remove default Nginx site
+  file:
+    path: "/etc/nginx/sites-enabled/default"
+    state: absent
   notify: restart nginx
 
 - name: Create environment file template
