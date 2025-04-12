@@ -40,17 +40,17 @@
       
   tasks:
     - name: Install application dependencies
-      shell: npm install
+      shell: pnpm install
       args:
-        chdir: "/var/www/{{ app_name }}"
+        chdir: "/var/www/{{ app_name }}/sample-app"
       become: yes
       become_user: app
       when: app_type in ["nextjs", "react", "express"]
         
     - name: Build application
-      shell: npm run build
+      shell: pnpm run build
       args:
-        chdir: "/var/www/{{ app_name }}"
+        chdir: "/var/www/{{ app_name }}/sample-app"
       become: yes
       become_user: app
       when: app_type in ["nextjs", "react"]
@@ -58,11 +58,11 @@
     - name: Set up PM2 to run the application
       shell: |
         pm2 delete {{ app_name }} || true
-        pm2 start npm --name "{{ app_name }}" -- start
+        pm2 start pnpm --name "{{ app_name }}" -- start
         pm2 save
         pm2 startup
       args:
-        chdir: "/var/www/{{ app_name }}"
+        chdir: "/var/www/{{ app_name }}/sample-app"
       become: yes
       become_user: app
       when: app_type in ["nextjs", "express"]
