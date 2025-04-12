@@ -30,10 +30,12 @@ variable "instance_type" {
 variable "key_name" {
   description = "Name of the SSH key pair to use for the instance"
   type        = string
+  nullable    = true
 }
 
 variable "ssh_private_key" {
   description = "Private SSH key for accessing the instance"
   type        = string
   sensitive   = true
+  nullable    = true
 }
