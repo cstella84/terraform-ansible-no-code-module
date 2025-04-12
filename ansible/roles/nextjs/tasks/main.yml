@@ -19,6 +19,12 @@
     global: yes
     state: present
 
+- name: Install pnpm globally
+  npm:
+    name: pnpm
+    global: yes
+    state: present
+
 - name: Create application directory
   file:
     path: "/var/www/{{ app_name }}"
